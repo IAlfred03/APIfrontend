@@ -1,48 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
+import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
+
+const API_URL = "https://apis-project-9nac.onrender.com/violations";
+
+
+const customIcon = new Icon({
+    iconUrl: "/discipline-violation-management-01.png", // Use relative path
+    iconSize: [25, 25]
+});
 
 function App() {
     const [violations, setViolations] = useState([]);
-    const [error, setError] = useState(null);  // Track error state
-    const [loading, setLoading] = useState(true);  // Track loading state
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log("🔍 Fetching data from API...");
-        // Fetch violations data from the FastAPI backend
-        fetch('http://127.0.0.1:8000/violations')
+        fetch(API_URL)
             .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!res.ok) throw new Error('Network response was not ok');
                 return res.json();
             })
             .then((data) => {
                 console.log("Fetched data:", data);
-                setViolations(data);  // Update the state with the fetched data
+                setViolations(data);
             })
             .catch((error) => {
                 console.error('Error fetching violations:', error);
                 setError('Error fetching data');
             })
-            .finally(() => setLoading(false));  // Mark loading as false when done
-    }, []);  // Empty dependency array ensures this runs only once when the component mounts
+            .finally(() => setLoading(false));
+    }, []);
 
-    if (loading) {
-        return <p>Loading violations...</p>;  // Show loading message
-    }
-
-    if (error) {
-        return <p>{error}</p>;  // Show error message if fetch failed
-    }
+    if (loading) return <p>Loading violations...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <div>
             <h1>NESC Violation Map</h1>
             <MapContainer
-                center={[47.7511, -120.7401]}  // Coordinates for Washington state
+                center={[47.7511, -120.7401]}
                 zoom={7}
                 style={{ height: '100vh', width: '100%' }}
             >
@@ -53,10 +53,7 @@ function App() {
                     <Marker
                         key={violation.id}
                         position={[violation.latitude, violation.longitude]}
-                        icon={new Icon({
-                          iconUrl: "C:\Users\isaia\OneDrive\Desktop\nesc\frontend\myapp\public\discipline-violation-management-01.png", // Path to a custom image ico/images/discipline-violation-management-01.pngn
-                          iconSize: [25, 25], // Size of the icon
-                      })}
+                        icon={customIcon}
                     >
                         <Popup>
                             <strong>{violation.location}</strong><br />
@@ -70,6 +67,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
