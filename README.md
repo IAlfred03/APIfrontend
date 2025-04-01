@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+NESC Compliance Monitoring System
+The NESC Compliance Monitoring System is a full-stack web application designed to visualize violations of the National Electrical Safety Code (NESC). The system consists of a FastAPI backend and a React frontend, allowing users to monitor compliance issues in an interactive way. The application fetches NESC violation data from a FastAPI backend, displays violations on an interactive map using Leaflet.js, and supports real-time updates for compliance monitoring.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tech Stack
+The backend is built using FastAPI, a high-performance web framework, and uses SQLite to store violations data. Additionally, CORS Middleware is used to handle cross-origin requests. The frontend is developed using React.js, with Leaflet.js and React-Leaflet providing the interactive map functionality.
 
-## Available Scripts
+Project Structure
+The project is organized into two main directories: backend/, which contains the FastAPI application (main.py for the API, fetch_data.py for data processing, and requirements.txt for dependencies), and frontend/, which contains the React app (App.js for the main component, Map.js for rendering the Leaflet map, and public/ for static assets).
 
-In the project directory, you can run:
+Setup & Installation
+To set up the backend, navigate to the backend/ directory and install dependencies using pip install -r requirements.txt. Start the FastAPI server with uvicorn main:app --reload, making the API available at http://127.0.0.1:8000. You can test the API by accessing http://127.0.0.1:8000/violations.
 
-### `npm start`
+For the frontend, navigate to frontend/myapp/, install dependencies using npm install, and start the development server with npm start. The frontend will be accessible at http://localhost:3000.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Deployment
+To deploy the backend, push the latest changes to GitHub and deploy it on Render. After deployment, update the API_URL in the frontend to match the backend’s deployed URL, such as "https://apis-project-9nac.onrender.com/violations". To deploy the frontend, push the changes to GitHub and deploy the React app on Render. The frontend will then be accessible at https://apifrontend-e05x.onrender.com.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Troubleshooting
+If you encounter a CORS Policy Error, ensure that the FastAPI CORS settings include the deployed frontend URL. Update the middleware configuration to:
 
-### `npm test`
+python
+Copy
+Edit
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://apifrontend-e05x.onrender.com"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+After making changes, commit and redeploy the backend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Future Improvements
+Planned enhancements include WebSocket support for real-time violation updates, authentication for authorized users, and machine learning predictions for violation risks.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributors
+👨🏾‍💻 Isaiah Alfred – Developer
+📧 Contact: isaiahalfred416@gmail.com
