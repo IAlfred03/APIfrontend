@@ -44,3 +44,10 @@ Contributors
 
 👨🏾‍💻 Isaiah Alfred – Developer
 📧 Contact: isaiahalfred416@gmail.com
+
+![nesc 2](https://github.com/user-attachments/assets/75f59cac-5264-4aec-8fe0-e5e0afe4ff2a)
+
+
+![nesc](https://github.com/user-attachments/assets/db9f351a-c55d-4f19-9240-17147a75ade6)
+
+
